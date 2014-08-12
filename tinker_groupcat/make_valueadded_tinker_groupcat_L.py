@@ -3,7 +3,7 @@
 #Author: Duncan Campbell
 #Written: August 14, 2013
 #Yale University
-#Description: Read in hdf5 berland groupcat catalogues and print out names
+#Description: Read in hdf5 tinker groupcat catalogues and print out names
 
 ###packages###
 import numpy as np
@@ -22,7 +22,7 @@ def main():
     savepath1 = filepath1 + 'custom_catalogues/'
     filepath2 = cu.get_output_path() + 'processed_data/mpa_dr7/'
     savepath2 = filepath2 + 'custom_catalogues/'
-    filepath3 = cu.get_output_path() + 'processed_data/wetzel_groupcat/'
+    filepath3 = cu.get_output_path() + 'processed_data/tinker_groupcat/'
     savepath3 = filepath3 + 'custom_catalogues/'
     #################################################################
 
@@ -42,13 +42,13 @@ def main():
     print catalogue1
     f1 =  h5py.File(filepath1+catalogue1+'.hdf5', 'r')
     dset1 = f1.get(catalogue1)
-    match13 = np.load(filepath1+'wetzel_groupcat_match/'+catalogue3+'_'+catalogue1+'_match.npy')
+    match13 = np.load(filepath1+'tinker_groupcat_match/'+catalogue3+'_'+catalogue1+'_match.npy')
 
     #open mpa 
     print catalogue2
     f2 =  h5py.File(filepath2+catalogue2+'.hdf5', 'r')
     dset2 = f2.get(catalogue2)
-    match23 = np.load(filepath2+'wetzel_groupcat_match/'+catalogue3+'_'+catalogue2+'_match.npy')
+    match23 = np.load(filepath2+'tinker_groupcat_match/'+catalogue3+'_'+catalogue2+'_match.npy')
 
     #open groupcat
     print catalogue3
