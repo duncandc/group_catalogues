@@ -15,8 +15,8 @@ import custom_utilities as cu
 
 def main():
 
-    filepath = cu.get_data_path() + 'Wetzel_groupcat/'
-    savepath = cu.get_output_path() + 'processed_data/Wetzel_groupcat/'
+    filepath = cu.get_data_path() + 'tinker_groupcat/'
+    savepath = cu.get_output_path() + 'processed_data/tinker_groupcat/'
     #################################################################
 
     names=['ID','ra','dec','z','M_star','Mag_r','Mag_g','SSFR','p_sat','central_ind','M_halo','R_vir','d_proj']
