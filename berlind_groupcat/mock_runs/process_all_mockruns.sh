@@ -1,0 +1,9 @@
+#!/bin/bash
+
+python process_mockruns_4.0.py Mr19_age_distribution_matching_mock &
+python process_mockruns_4.0.py Mr19_age_distribution_matching_mock_cen_shuffle &
+python process_mockruns_4.0.py Mr19_age_distribution_matching_mock_satsys_shuffle &
+python process_mockruns_4.0.py Mr19_age_distribution_matching_mock_sys_empty_shuffle &
+python process_mockruns_4.0.py Mr19_age_distribution_matching_mock_sys_empty_shuffle_satsys_shuffle &
+python process_mockruns_4.0.py Mr19_age_distribution_matching_mock_sys_empty_shuffle_cen_shuffle &
+python process_mockruns_4.0.py Mr19_age_distribution_matching_mock_sys_empty_shuffle_satrel_shuffle &
