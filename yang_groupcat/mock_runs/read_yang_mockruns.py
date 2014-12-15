@@ -10,17 +10,19 @@ import numpy as np
 from astropy.io import ascii
 import h5py
 import sys
+import custom_utilities as cu
 
 def main():
 
     i = int(sys.argv[1])
     version = sys.argv[2]
 
-    filepath = '/scratch/dac29/data/Yang_groups/mock_runs/4th_run/version_'+version+'/'
-    savepath = '/scratch/dac29/output/processed_data/yang_groupcat/mock_runs/4th_run/version_'+version+'/'
+    filepath = cu.get_data_path()+'Yang_groupcat/mock_runs/4th_run/version_'+version+'/'
+    savepath = cu.get_output_path()+'processed_data/yang_groupcat/mock_runs/4th_run/version_'+version+'/'
 
     catalogues = ['Mr19_age_distribution_matching_mock_radec_mock',\
                   'Mr19_age_distribution_matching_mock_sys_empty_shuffle_satrel_shuffle_radec_mock']
+
     filenames_1 = ['imock1_1','imock2_1']
     filenames_2 = ['imock1_2','imock2_2']
     filenames_3 = ['mock1_L_m','mock2_L_m']
@@ -32,13 +34,13 @@ def main():
     catalogue = catalogues[i]
     filename = filenames_1[i]
     print 'open file 1/3...'
-    data_1 = ascii.read(filepath+filename,names=names_1)
+    data_1 = ascii.read(filepath+filename,names=names_1,delimiter='\s',data_start=0,format='no_header')
     filename = filenames_2[i]
     print 'open file 2/3...'
-    data_2 = ascii.read(filepath+filename,names=names_2)
+    data_2 = ascii.read(filepath+filename,names=names_2,delimiter='\s',data_start=0,format='no_header')
     filename = filenames_3[i]
     print 'open file 3/3...'
-    data_3 = ascii.read(filepath+filename,names=names_3)
+    data_3 = ascii.read(filepath+filename,names=names_3,delimiter='\s',data_start=0,format='no_header')
 
     print len(data_1), len(data_2), len(data_3)
 
@@ -50,7 +52,8 @@ def main():
     ind = np.take(index, sorted_index, mode="clip")
     mask = data_3['GROUP_ID'][ind] != data_1['GROUP_ID']
     result = np.ma.array(ind, mask=mask)
-
+     
+    """
     #combine different files into one data structure
     dtype=[('gal_ID_1','>i8'),('gal_ID_2','>i8'),('group_ID','>i8'),('brightest','>i8'),\
            ('ra_cen','>f8'),('dec_cen','>f8'),('z_cen','>f8'),('group_L19','>f8'),('halo_mass','>f8')]
@@ -67,6 +70,23 @@ def main():
     data['z_cen']     = data_3['z'][result]
     data['group_L19'] = data_3['L19'][result]
     data['halo_mass'] = data_3['MGROUP'][result]
+    
+    #save
+    print 'saving:', savepath+catalogue+'.hdf5'
+    f = h5py.File(savepath+catalogue+'.hdf5', 'w')
+    dset = f.create_dataset(catalogue, data=data)
+    f.close()
+    print 'done.'
+    """
+    
+    #create output file with galaxy ID and group ID
+    dtype=[('gal_ID','>i8'),('group_ID','>i8')]
+    dtype=np.dtype(dtype)
+    data = np.recarray((len(data_1),),dtype=dtype)
+
+    #fill in data structure.
+    data['gal_ID']  = data_1['ID']
+    data['group_ID']  = data_1['GROUP_ID']
     
     #save
     print 'saving:', savepath+catalogue+'.hdf5'
