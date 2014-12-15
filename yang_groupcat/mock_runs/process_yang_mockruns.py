@@ -21,7 +21,7 @@ def main():
     version   = sys.argv[2]
 
     #############################################################################################
-    savepath = '/scratch/dac29/output/processed_data/yang_groupcat/mock_runs/4th_run/version_'+version+'/custom_catalogues/'
+    savepath = cu.get_output_path()+'processed_data/yang_groupcat/mock_runs/4th_run/version_'+version+'/custom_catalogues/'
     #open mock group catalogue
     filepath = cu.get_output_path()+'processed_data/yang_groupcat/mock_runs/4th_run/version_'+version+'/'
     catalogue_name = catalogue+'_radec_mock'
@@ -86,7 +86,7 @@ def main():
     data['k_2']     = ind
     data['M_g,0.1'] = mock['M_r,0.1'][ind]+mock['g-r'][ind]
     data['M_r,0.1'] = mock['M_r,0.1'][ind]
-    data['HALO_M']  = mock['M_host'][ind]
+    data['HALO_M']  = mock['M200b_host'][ind]
 
     #determine cen/sat designation in xyz mock
     result = np.where(mock['ID_host'][ind]==-1)[0]
@@ -103,7 +103,7 @@ def main():
     #record color designation
     data['red'][red]  = 1
     data['red'][blue] = 0
-
+    
     for i in range(0,len(data)):
         group_id = data['GROUP_ID'][i]
         members  = np.where(data['GROUP_ID']==group_id)[0]
@@ -141,9 +141,9 @@ def main():
         central = np.where(data['M_r,0.1'][members]==min(data['M_r,0.1'][members]))[0][0]
         central = members[central]
         data['CEN_IND'][members] = central
-
+    
     #read in mass halo function
-    filepath = '/scratch/dac29/fortran_code/mass_functions/'
+    filepath = cu.get_base_path()+'fortran_code/mass_functions/'
     filename = 'Bolshoi_Massfunc.dat'
     names = ['dM','dn','nsum']
     dndM = ascii.read(filepath+filename, delimiter='\s', names=names, data_start=0)
