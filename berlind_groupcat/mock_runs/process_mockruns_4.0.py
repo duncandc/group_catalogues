@@ -89,7 +89,7 @@ def main():
     data['k_2']     = ind
     data['M_g,0.1'] = mock['M_r,0.1'][ind]+mock['g-r'][ind]
     data['M_r,0.1'] = mock['M_r,0.1'][ind]
-    data['HALO_M']  = mock['M_host'][ind]
+    data['HALO_M']  = mock['M200b_host'][ind]
 
     #determine cen/sat designation in xyz mock
     result = np.where(mock['ID_host'][ind]==-1)[0]

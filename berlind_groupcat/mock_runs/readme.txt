@@ -13,7 +13,10 @@ process_all_mockruns.sh
     obsolete.  This ran the above script for all the mocks we have
 
 bootstrap_mock_groups_2.0.py
-    creates bootstrap group catalogues for the mock berlind group catalogues.
+    obsolete.  creates bootstrap group catalogues for the mock berlind group catalogues.
 
 make_berlind_mock_bootstraps_4.0.sh
-    runs the above script for all mocks.
+    obsolete.  runs the above script for all mocks.
+    
+all the code that makes useful group catalogues and bootstrap catalogues has been moved
+to the galactic conformity project folder.
