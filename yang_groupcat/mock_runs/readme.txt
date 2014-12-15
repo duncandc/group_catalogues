@@ -16,7 +16,10 @@ process_all_yang_mockruns.sh
     obsolete.  This ran the above script for all the mocks we have
     
 bootstrap_mock_groups.py
-    creates bootstrap group catalogues for the mock yang group catalogues.
+    obsolete. creates bootstrap group catalogues for the mock yang group catalogues.
 
 make_yang_mock_bootstraps.sh
-    runs the above script for all mocks.
+    obsolete. runs the above script for all mocks.
+    
+All the code that makes useful group catalogues and bootstrap catalogues has been 
+consolidated and moved to a folder in galactic_conformoty project. 
